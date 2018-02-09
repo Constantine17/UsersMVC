@@ -11,26 +11,28 @@
     <form id="form1" runat="server">
         <div style="width: 389px">
             Заполните данные для регистрации:<br />
+            <asp:Label ID="Message" runat="server" ForeColor="Red"></asp:Label>
+            <br />
             <br />
             <asp:Label ID="Label1" runat="server" Text="Имя"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="TextName" runat="server" style="margin-left: 123px" Width="160px" MaxLength="255"></asp:TextBox>
+            <asp:TextBox ID="TextName" runat="server" style="margin-left: 123px" Width="160px" MaxLength="255" OnTextChanged="TextName_TextChanged"></asp:TextBox>
             <br />
             <asp:Label ID="Label2" runat="server" Text="Фамилия"></asp:Label>
             <asp:TextBox ID="TextLastName" runat="server" style="margin-left: 119px" Width="160px" MaxLength="255"></asp:TextBox>
             <br />
             <asp:Label ID="Label3" runat="server" Text="Email"></asp:Label>
-            <asp:TextBox ID="TextEmail" runat="server" style="margin-left: 148px" Width="160px" MaxLength="125"></asp:TextBox>
+            <asp:TextBox ID="TextEmail" runat="server" style="margin-left: 148px" Width="160px" MaxLength="125" TextMode="Email"></asp:TextBox>
             <br />
             <asp:Label ID="Label4" runat="server" Text="Телефон"></asp:Label>
-            <asp:TextBox ID="TextPhone" runat="server" style="margin-left: 124px" Width="160px" MaxLength="15"></asp:TextBox>
+            <asp:TextBox ID="TextPhone" runat="server" style="margin-left: 124px" Width="160px" MaxLength="15" TextMode="Phone"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="Label5" runat="server" Text="Пароль"></asp:Label>
-            <asp:TextBox ID="TextPassword1" runat="server" style="margin-left: 130px" Width="160px" MaxLength="255"></asp:TextBox>
+            <asp:TextBox ID="TextPassword1" runat="server" style="margin-left: 130px" Width="160px" MaxLength="255" TextMode="Password"></asp:TextBox>
             <br />
             <asp:Label ID="Label6" runat="server" Text="Потверждение пароля"></asp:Label>
-            <asp:TextBox ID="TextPassword2" runat="server" style="margin-left: 28px" Width="160px" MaxLength="255"></asp:TextBox>
+            <asp:TextBox ID="TextPassword2" runat="server" style="margin-left: 28px" Width="160px" MaxLength="255" TextMode="Password"></asp:TextBox>
             <br />
             <br />
             <asp:Button ID="ButtonSendData" runat="server" OnClick="ButtonSendData_Click" Text="Поттвердить" />

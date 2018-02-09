@@ -148,6 +148,20 @@
     <Compile Include="user\create.aspx.designer.cs">
       <DependentUpon>create.aspx</DependentUpon>
     </Compile>
+    <Compile Include="user\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user\Restricted\get.aspx.cs">
+      <DependentUpon>get.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\Restricted\get.aspx.designer.cs">
+      <DependentUpon>get.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -172,6 +186,8 @@
     <Content Include="user\create.aspx">
       <BrowseToURL>~/user/create.aspx</BrowseToURL>
     </Content>
+    <Content Include="user\login.aspx" />
+    <Content Include="user\Restricted\get.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -188,6 +204,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="user\Restricted\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
