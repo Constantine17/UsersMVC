@@ -42,6 +42,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\..\AJAX\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -132,11 +135,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\WorkDataBase.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,10 +173,24 @@
     <Compile Include="user\Restricted\get.aspx.designer.cs">
       <DependentUpon>get.aspx</DependentUpon>
     </Compile>
+    <Compile Include="user\Restricted\update.aspx.cs">
+      <DependentUpon>update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user\Restricted\update.aspx.designer.cs">
+      <DependentUpon>update.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DataBase\dbo.Table.sql" />
+    <Content Include="DataBase\UsersMVC.mdf" />
+    <Content Include="DataBase\UsersMVC.разрешения.sql" />
+    <Content Include="DataBase\UsersMVC_log.ldf">
+      <DependentUpon>UsersMVC.mdf</DependentUpon>
+    </Content>
+    <Content Include="default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -187,7 +212,10 @@
       <BrowseToURL>~/user/create.aspx</BrowseToURL>
     </Content>
     <Content Include="user\login.aspx" />
-    <Content Include="user\Restricted\get.aspx" />
+    <Content Include="user\Restricted\get.aspx">
+      <BrowseToURL>~/user/Restricted/get.aspx</BrowseToURL>
+    </Content>
+    <Content Include="user\Restricted\update.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -209,7 +237,6 @@
   <ItemGroup>
     <Folder Include="App_Code\" />
     <Folder Include="App_Data\" />
-    <Folder Include="DataBase\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

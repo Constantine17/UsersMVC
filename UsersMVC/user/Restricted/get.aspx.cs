@@ -11,7 +11,39 @@ namespace UsersMVC.user.Restricted
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                Guid id = Guid.Empty;
+                if (Request.Cookies["User"] != null)
+                {
+                    string userSettings;
+                    if (Request.Cookies["User"]["Id"] != null)
+                    {
+                        userSettings = Request.Cookies["User"]["Id"];
+                        id = new Guid(userSettings);
+                    }
+                }
+                else return;
 
+                WorkDataBase getUser = new WorkDataBase();
+                var userData = getUser.GetUserData(id);
+
+                if (Page.IsPostBack) return;
+
+                this.TextName.Text = userData.name;
+                this.TextLastName.Text = userData.lastName;
+                this.TextEmail.Text = userData.email;
+                this.TextPhone.Text = userData.phone;
+            }
+            catch (Exception ex)
+            {
+                new Log().WriteException(ex, "Error get user date");
+            }
+        }
+
+        protected void ButtonChangeData_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(@"/user/Restricted/update.aspx");
         }
     }
 }

@@ -10,7 +10,7 @@
 namespace UsersMVC.user.Restricted {
     
     
-    public partial class get {
+    public partial class update {
         
         /// <summary>
         /// form1 элемент управления.
@@ -20,6 +20,24 @@ namespace UsersMVC.user.Restricted {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// toolScriptManageer1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ToolkitScriptManager toolScriptManageer1;
+        
+        /// <summary>
+        /// Message элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Message;
         
         /// <summary>
         /// Label1 элемент управления.
@@ -94,6 +112,24 @@ namespace UsersMVC.user.Restricted {
         protected global::System.Web.UI.WebControls.TextBox TextPhone;
         
         /// <summary>
+        /// ButtonSaveData элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonSaveData;
+        
+        /// <summary>
+        /// ButtonDelete элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonDelete;
+        
+        /// <summary>
         /// ButtonSendData элемент управления.
         /// </summary>
         /// <remarks>
@@ -101,5 +137,14 @@ namespace UsersMVC.user.Restricted {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonSendData;
+        
+        /// <summary>
+        /// mskD элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender mskD;
     }
 }

@@ -14,93 +14,85 @@ namespace UsersMVC.user
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            HttpCookie cookie = new HttpCookie("User");
-            cookie["username"] = "fistuser";
-            Response.Cookies.Add(cookie);
-
-
-            if (Request.Cookies["User"] != null)
-            {
-                string userSettings;
-                if (Request.Cookies["User"]["username"] != null)
-                { userSettings = Request.Cookies["User"]["username"]; }
-            }
-            /*
-            FormsAuthenticationTicket tkt;
-            string cookiestr;
-            HttpCookie ck;
-            tkt = new FormsAuthenticationTicket("user", true, 10);
-            cookiestr = FormsAuthentication.Encrypt(tkt);
-            ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-            ck.Path = FormsAuthentication.FormsCookiePath;
-            Response.Cookies.Add(ck);
-            Response.End();
-
-            var gg = Request.Cookies;
-            var ga = FormsAuthentication.Decrypt(FormsAuthentication.FormsCookieName);
-            */
-            /*
-            tkt = new FormsAuthenticationTicket(1, txtUserName.Value, DateTime.Now,
-      DateTime.Now.AddMinutes(30), chkPersistCookie.Checked, "your custom data");
-            cookiestr = FormsAuthentication.Encrypt(tkt);
-            ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
-            if (chkPersistCookie.Checked)
-                ck.Expires = tkt.Expiration;
-            ck.Path = FormsAuthentication.FormsCookiePath;
-            Response.Cookies.Add(ck);
-
-            string strRedirect;
-            strRedirect = Request["ReturnUrl"];
-            if (strRedirect == null)
-                strRedirect = "default.aspx";
-            Response.Redirect(strRedirect, true);*/
         }
 
         protected void ButtonSendData_Click(object sender, EventArgs e)
         {
-            UserData userData = new UserData();
-
-            // проверка зополнения полей {
-            bool valideForm = true;
-            userData.name = this.TextName.Text;
-            userData.lastName = this.TextLastName.Text;
-            userData.email = this.TextEmail.Text;
-            userData.phone = this.TextPhone.Text;
-
-            if (userData.name == "") { this.TextName.BorderColor = Color.Red; valideForm = false; }
-            if (userData.lastName == "") { this.TextLastName.BorderColor = Color.Red; valideForm = false; }
-            if (userData.email == "") { this.TextEmail.BorderColor = Color.Red; valideForm = false; } // проверить email
-            if (userData.phone == "") { this.TextPhone.BorderColor = Color.Red; valideForm = false; } // перевести телефон в международный формат
-
-            if (!valideForm) {
-                this.Message.Text = "*Зполните, пожайлуста, все поля.";
-                return;
-            }
-            //}
-
-            // провека совпадения паролей
-            if (this.TextPassword1.Text == this.TextPassword2.Text || this.TextPassword1.Text != "")
+            try
             {
-                userData.password = this.TextPassword1.Text.GetHashCode();
-                WorkDataBase o = new WorkDataBase();
+                UserData userData = new UserData();
 
-                o.NonExistEmail(userData);
+                // проверка зополнения полей {
+                bool valideForm = true;
+                userData.name = this.TextName.Text;
+                userData.lastName = this.TextLastName.Text;
+                userData.email = this.TextEmail.Text;
+                userData.phone = this.TextPhone.Text;
+
+                if (userData.name == "") { this.TextName.BorderColor = Color.Red; valideForm = false; }
+                if (userData.lastName == "") { this.TextLastName.BorderColor = Color.Red; valideForm = false; }
+                if (userData.email == "") { this.TextEmail.BorderColor = Color.Red; valideForm = false; }
+                if (userData.phone == "") { this.TextPhone.BorderColor = Color.Red; valideForm = false; } 
+
+                if (!valideForm)
+                {
+                    this.Message.Text = "*Зполните, пожайлуста, все поля.";
+                    return;
+                }
+                //}
+
+                // провека совпадения паролей
+                if (this.TextPassword1.Text == this.TextPassword2.Text && this.TextPassword1.Text != "")
+                {
+                    userData.password = this.TextPassword1.Text.GetHashCode();
+                    WorkDataBase insertUser = new WorkDataBase();
+
+                    Guid id = insertUser.NonExistEmail(userData);
+                    if (id == Guid.Empty)
+                    {
+                        this.Message.Text = "*Данный Email уже используеться";
+                        return;
+                    }
+                    CreateCookie(id);
+                    FormsAuthentication.RedirectFromLoginPage(id.ToString(), false);
+                    Response.Redirect(@"/user/Restricted/get.aspx");
+                    //Server.Transfer("user/get.aspx");
+                }
+                else
+                {
+                    this.Message.Text = "*Пароли не совпадают";
+                    this.TextPassword1.Text = "";
+                    this.TextPassword2.Text = "";
+
+                    return;
+                }
             }
-            else {
-                this.Message.Text = "*Пароли не совпадают";
-                this.TextPassword1.Text = "";
-                this.TextPassword2.Text = "";
-
-                return;
+            catch(Exception ex) {
+                new Log().WriteException(ex, "Error create user");
             }
+        }
 
-            //FormsAuthentication.g
+        // создание куки файлов для последующей индификации пользователя в системе
+        private void CreateCookie(Guid id)
+        {
+            HttpCookie cookie = new HttpCookie("User");
+            cookie["Id"] = id.ToString();
+            Response.Cookies.Add(cookie);
         }
 
         protected void TextName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void TextPhone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ButtonToLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(@"/user/login.aspx");
         }
     }
 }

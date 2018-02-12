@@ -11,6 +11,9 @@
     <form id="form1" runat="server">
         <div>
         </div>
+        <asp:Login ID="LoginForm" runat="server" OnAuthenticate="LoginForm_Authenticate" UserNameLabelText="Email:">
+        </asp:Login>
+        <asp:Button ID="ButtonToCreate" runat="server" OnClick="ButtonToCreate_Click" style="margin-left: 83px" Text="Регистрация" Width="134px" />
     </form>
 </body>
 </html>
